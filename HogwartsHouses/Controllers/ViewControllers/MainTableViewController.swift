@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        HouseGuessController.shared.fetchedResultsController.delegate = self
+        
     }
     
     // MARK: - Actions
@@ -19,7 +23,6 @@ class MainTableViewController: UITableViewController {
         presentAlertController()
     }
     
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,6 +39,7 @@ class MainTableViewController: UITableViewController {
         let guessToDisplay = HouseGuessController.shared.fetchedResultsController.object(at: indexPath)
         
         cell.guess = guessToDisplay
+        cell.delegate = self
 
         return cell
     }
@@ -52,7 +56,7 @@ class MainTableViewController: UITableViewController {
         return view.frame.height / 7
     }
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return HouseGuessController.shared.fetchedResultsController.sectionIndexTitles[section] == "0" ? "Invisibility Cloak" : "Visible"
     }
     
@@ -81,3 +85,50 @@ class MainTableViewController: UITableViewController {
         present(alertController, animated: true)
     }
 } // End of class
+
+extension MainTableViewController: HouseGuessTableViewCellDelegate {
+    func houseButtonTapped(_ sender: HouseGuessTableViewCell) {
+        guard let index = tableView.indexPath(for: sender) else {return}
+        let guess = HouseGuessController.shared.fetchedResultsController.object(at: index)
+        HouseGuessController.shared.updateVisibility(houseGuess: guess)
+        sender.updateViews()
+    }
+}
+
+extension MainTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            guard let indexPath = indexPath else {break}
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .insert:
+            guard let newIndexPath = newIndexPath else {break}
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .move:
+            guard let indexPath = indexPath, let newIndexPath = newIndexPath else {break}
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .update:
+            guard let indexPath = indexPath else {break}
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        default:
+            fatalError()
+        }
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            let indexSet = IndexSet(integer: sectionIndex)
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            let indexSet = IndexSet(integer: sectionIndex)
+            tableView.deleteSections(indexSet, with: .automatic)
+        default: fatalError()
+        }
+    }
+}
