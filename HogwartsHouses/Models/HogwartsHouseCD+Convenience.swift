@@ -11,7 +11,7 @@ import CoreData
 
 extension HouseGuess {
     
-    convenience init(guessName: String, house: String, isVisible: Bool = false, context: NSManagedObjectContext) {
+    convenience init(guessName: String, house: String, isVisible: Bool = false, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.guessName = guessName
         self.house = house
