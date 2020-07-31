@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B398C3524D3A8C500056383 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B398C3424D3A8C500056383 /* MainTableViewController.swift */; };
+		4B398C3824D3AC2000056383 /* HouseGuessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B398C3724D3AC2000056383 /* HouseGuessTableViewCell.swift */; };
 		4B4BB62E24D392F000514023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4BB62D24D392F000514023 /* AppDelegate.swift */; };
 		4B4BB63024D392F000514023 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4BB62F24D392F000514023 /* SceneDelegate.swift */; };
 		4B4BB63524D392F000514023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B4BB63324D392F000514023 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B398C3424D3A8C500056383 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		4B398C3724D3AC2000056383 /* HouseGuessTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseGuessTableViewCell.swift; sourceTree = "<group>"; };
 		4B4BB62A24D392F000514023 /* HogwartsHouses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HogwartsHouses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4BB62D24D392F000514023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B4BB62F24D392F000514023 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B398C3224D3A89500056383 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4B4BB64C24D39DAB00514023 /* HouseGuessController.swift */,
+			);
+			path = ModelControllers;
+			sourceTree = "<group>";
+		};
+		4B398C3324D3A8A000056383 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4B398C3424D3A8C500056383 /* MainTableViewController.swift */,
+				4B398C3624D3ABF300056383 /* CustomCells */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4B398C3624D3ABF300056383 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				4B398C3724D3AC2000056383 /* HouseGuessTableViewCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		4B4BB62124D392F000514023 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +115,8 @@
 		4B4BB64924D39D6A00514023 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4B4BB64C24D39DAB00514023 /* HouseGuessController.swift */,
+				4B398C3324D3A8A000056383 /* ViewControllers */,
+				4B398C3224D3A89500056383 /* ModelControllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +215,8 @@
 				4B4BB62E24D392F000514023 /* AppDelegate.swift in Sources */,
 				4B4BB64624D3997800514023 /* HogwartsHouseCD+Convenience.swift in Sources */,
 				4B4BB63024D392F000514023 /* SceneDelegate.swift in Sources */,
+				4B398C3824D3AC2000056383 /* HouseGuessTableViewCell.swift in Sources */,
+				4B398C3524D3A8C500056383 /* MainTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
